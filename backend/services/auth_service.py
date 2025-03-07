@@ -5,6 +5,7 @@ from fastapi import Depends, HTTPException, Security
 from fastapi.security import HTTPBearer
 from config import JWT_SECRET, JWT_ALGORITHM, JWT_EXPIRATION_MINUTES
 from services.db_service import get_db
+from bson import ObjectId
 
 security = HTTPBearer()
 
@@ -45,7 +46,7 @@ def get_current_user(token: str = Security(security), db=Depends(get_db)):
     
     payload = decode_access_token(token.credentials)  # Decode JWT token
     user_id = payload.get("user_id")  # Extract user ID
-    user = db["users"].find_one({"_id": user_id})  # Fetch user from database
+    user = db["users"].find_one({"_id": ObjectId(user_id)})  # Fetch user from database
     
     if not user:
         raise HTTPException(status_code=401, detail="User not found")
