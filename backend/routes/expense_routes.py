@@ -8,24 +8,31 @@ from bson import ObjectId
 expense_router = APIRouter()
 
 # Adds a new expense for the authenticated user
-@expense_router.post("/expenses/add")
+@expense_router.post("/expenses/add")  
 def add_expense(expense: Expense,
-                db: Collection = Depends(get_db),
-                current_user: dict = Depends(get_current_user)):
+                db: Collection = Depends(get_db),  # Get the MongoDB collection
+                current_user: dict = Depends(get_current_user)):  # Get the currently authenticated user
 
-    user_id = ObjectId(current_user["_id"])  # Retrieve the user ID from the token
-    expense_dict = expense.dict() # 'expense' is Pydantic object and Mongo do not work with it so we need to convert it into dict 
-    expense_dict["_id"] = ObjectId()  
-    expense_dict["user_id"] = user_id  # Attach the user ID to the expense dict
+    user_id = ObjectId(current_user["_id"])  # Convert the user's ID from the token to an ObjectId
 
-    db["expenses"].insert_one(expense_dict)  # Save the expense into the "expense" collection in MongoDB
-    
+    expense_dict = expense.dict()  # Convert the Pydantic model (Expense) into a dictionary
+    expense_dict["_id"] = ObjectId()  # Generate a new ObjectId for this expense
+
+    expense_dict["user_id"] = user_id  # Attach the user ID to the expense dictionary
+
+    db["expenses"].insert_one(expense_dict) 
+
     db["users"].update_one(
-        {"_id": user_id}, # find the user first in the collection by his ID
-        {"$push": {"expenses": expense_dict["_id"]}} # adding the new expense id to the 'expense list' of the user
+        {"_id": user_id},  # Find the user in the "users" collection by their ID
+        {"$push": {"expenses": expense_dict["_id"]}}  # Add the expense's ID to the user's list of expenses
     )
 
-    return {"message": "Expense added successfully", "expense": {**expense_dict, "_id": str(expense_dict["_id"])}}
+    # Convert ObjectId to a string for JSON serialization
+    expense_dict["_id"] = str(expense_dict["_id"])  
+    expense_dict["user_id"] = str(expense_dict["user_id"])  
+
+    return {"message": "Expense added successfully", "expense": expense_dict}  
+
 
 
 

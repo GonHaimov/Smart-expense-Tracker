@@ -2,7 +2,6 @@ from pydantic import BaseModel, EmailStr
 from typing import List, Optional
 
 class User(BaseModel):
-    id: Optional[str] # ObjectId that create auto by MongoDB, not mandatory 
     user_name: str
     email: EmailStr
     password: str # with bcrypt

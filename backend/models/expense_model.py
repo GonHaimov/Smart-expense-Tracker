@@ -3,8 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 class Expense(BaseModel):
-    id: Optional[str] #ObjectId that create auto by MongoDB, not mandatory 
-    user_id: str
+    user_id: Optional[str] = None
     amount: float
     category: str
     date: datetime
