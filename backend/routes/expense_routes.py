@@ -52,7 +52,7 @@ def get_user_expenses(db: Collection = Depends(get_db), current_user: dict = Dep
 
 
 # Updates an existing expense (only if it belongs to the authenticated user)
-@expense_router.put("/expenses/update/{expense_id}")
+@expense_router.patch("/expenses/update/{expense_id}")
 def update_expense( expense_id: str,
                     updated_data: dict,
                     db: Collection = Depends(get_db),
