@@ -47,7 +47,11 @@ def login_user(login_data: LoginRequest,
     
     token = create_access_token(str(existing_user["_id"]))
     
-    return {"message": "User logged in successfully", "token": token}
+    return { 
+        "message": "User logged in successfully", 
+        "token": token,
+        "user_name": existing_user["user_name"]  # ✅ Send user_name to frontend
+    }
 
 
 # Returns the authenticated user's details

@@ -8,7 +8,7 @@ app = FastAPI()
 # Middleware to connect the frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # allowing only to my frontend 
+    allow_origins=["*"], # allowing all the ports to run
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; 
+import { loginUser } from "../api/api"; 
 import "../styles/LoginPage.css";
-import { loginUser } from "../api/api"; // Import the function to call the backend
 
-const LoginPage = () => {
-  // State variables to store form data
+const LoginPage = ({ setUserName }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Used to navigate to another page after login
+  const navigate = useNavigate();
 
-  // Function to handle form submission
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevents page refresh when the form is submitted
+    e.preventDefault();
 
     try {
-      const response = await loginUser({ email, password });  // Send data to the backend
-      localStorage.setItem("token", response.data.token);  // Store the token in local storage
-      navigate("/home");  // Redirect to the home page after login
+      const response = await loginUser({ email, password });  
+      localStorage.setItem("token", response.data.token);  
+
+      setUserName(response.data.user_name);  // ✅ שומר את שם המשתמש שהתקבל מה-Backend
+      navigate("/home");  // ✅ מעביר את המשתמש לדף הבית
     } catch (error) {
-      alert("Login failed: " + error.response.data.detail); // Show an error message if login fails
+      alert("Login failed: " + error.response.data.detail);
     }
   };
 
@@ -26,12 +26,25 @@ const LoginPage = () => {
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
-        <form onSubmit={handleLogin}>  {/* Calls handleLogin when form is submitted */}
-          <input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+        <form onSubmit={handleLogin}>  
+          <input 
+            type="email" 
+            placeholder="Email" 
+            required 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            required 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
           <button type="submit">Login</button>
         </form>
-        <p>Don't have an account? <Link to="/register">Register</Link></p>
+        
+        <p>Don't have an account? <Link to="/register">Sign up here</Link></p>
       </div>
     </div>
   );

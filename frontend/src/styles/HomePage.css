@@ -1,28 +1,33 @@
 .home-page {
-    background-color: #f4ede4; /* צבע רקע לעמוד הבית */
-    height: 100vh;
+    background-color: #f4ede4; /* צבע רקע */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    
+    /* מאפשר שהתוכן יתפרס לכל המסך */
+    width: 100vw;
+    height: 100vh;
+    
+    /* הצמדת הדף למסך */
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    /* מבטיח שהתוכן יתחיל מהחלק העליון */
+    padding-top: 50px; /* מוסיף רווח מהחלק העליון */
 }
 
-.home-container {
-    max-width: 800px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.home-container h2 {
+.home-page h2 {
     color: #007bff;
+    font-size: 34px;
+    margin-bottom: 10px;
 }
 
-.home-container p {
+.home-page p {
     font-size: 18px;
     color: #555;
     margin-top: 10px;
+    font-weight: bold;
 }
 
 .logout-button {
@@ -30,13 +35,39 @@
     color: white;
     padding: 10px;
     border: none;
-    width: 200px;
+    width: 100px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px; 
 }
 
 .logout-button:hover {
     background-color: #c82333;
+}
+
+.add-expense-button {
+    background-color: #ea9707;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    
+}
+
+.stats-button {
+    background-color: #35dc80;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
