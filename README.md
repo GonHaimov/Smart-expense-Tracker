@@ -59,24 +59,26 @@ _Coming soon..._
 - MongoDB running locally
 - `pip` and `npm` installed
 
+### 1. Clone the Repo
+
 git clone https://github.com/GonHaimov/smart-expense-tracker.git
 cd smart-expense-tracker 
 
 
 ### 2. Backend Setup
 
-cd backend
-pip install -r requirements.txt
+cd backend  
+pip install -r requirements.txt  
 uvicorn main:app --reload
 
-The backend will start on http://127.0.0.1:8000
+The backend will start on http://127.0.0.1:8000  
 Make sure MongoDB is running locally (default: mongodb://localhost:27017)
 
 ### 3. Frontend Setup
-cd frontend
-npm install
+cd frontend  
+npm install  
 npm start
 
-The frontend will start on http://localhost:3000 (or another port if 3000 is in use)
+The frontend will start on http://localhost:3000 (or another port if 3000 is in use)  
 Make sure the backend is running before using the app
 
