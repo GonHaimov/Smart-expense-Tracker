@@ -50,7 +50,7 @@ def login_user(login_data: LoginRequest,
     return { 
         "message": "User logged in successfully", 
         "token": token,
-        "user_name": existing_user["user_name"]  # ✅ Send user_name to frontend
+        "user_name": existing_user["user_name"]  # Send user_name to frontend
     }
 
 

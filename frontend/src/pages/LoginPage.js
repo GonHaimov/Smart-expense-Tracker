@@ -13,10 +13,11 @@ const LoginPage = ({ setUserName }) => {
 
     try {
       const response = await loginUser({ email, password });  
+      console.log(response)
       localStorage.setItem("token", response.data.token);  
 
-      setUserName(response.data.user_name);  // ✅ שומר את שם המשתמש שהתקבל מה-Backend
-      navigate("/home");  // ✅ מעביר את המשתמש לדף הבית
+      setUserName(response.data.user_name);  // saving the userName that got from the backend
+      navigate("/home");  
     } catch (error) {
       alert("Login failed: " + error.response.data.detail);
     }

@@ -3,7 +3,7 @@ import AppRoutes from "./routes";
 import "./App.css";
 
 function App() {
-  const [userName, setUserName] = useState(""); // ✅ המשתנה שמחזיק את שם המשתמש
+  const [userName, setUserName] = useState(""); 
 
   return <AppRoutes userName={userName} setUserName={setUserName} />;
 }
