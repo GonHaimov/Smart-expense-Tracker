@@ -22,7 +22,7 @@
 .login-container input {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
+    margin: 8px;
     border: 1px solid #b2bec3;
     border-radius: 5px;
 }

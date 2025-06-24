@@ -28,14 +28,14 @@ const LoginPage = ({ setUserName }) => {
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>  
-          <input 
+          <input className="email-input"
             type="email" 
             placeholder="Email" 
             required 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
           />
-          <input 
+          <input className="password-input"
             type="password" 
             placeholder="Password" 
             required 

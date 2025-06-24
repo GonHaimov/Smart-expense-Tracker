@@ -20,3 +20,12 @@ export const addExpense = async (newExpense) => {
         }
     });
 };
+
+export const getExpenses = async () => {
+    const token = localStorage.getItem("token");
+    return axios.get(`${API_URL}/expenses`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
